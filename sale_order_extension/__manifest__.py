@@ -1,0 +1,21 @@
+#---coding utf-8 ------
+{
+    'name'          : 'Sale Extension',
+    'version'       : '12.0.1.0',
+    'category'      : 'Sale',
+    'license'       : 'AGPL-3',
+    'author'        : 'Aung Myo Swe',
+    'email'         : 'aungmyoswe@asiamatrixsoftware.com',
+    'website'       : 'http://www.asiamatrixsoftware.com',
+    'description'       : 'Set Delivery Teams, Date of delivery, Validatity, Currency of Pricelist,', 
+    'depends'       : ['sale_management','sale','sales_team'],
+    'data'          : ['views/sale_delivery_term_view.xml',
+        'views/sale_date_of_delivery_view.xml',
+        'views/sale_validity_view.xml',
+        'views/sale_warranty_view.xml',
+        'views/sale_order_extension_view.xml',
+        'security/ir.model.access.csv'],
+    'installable'   : True,
+    'auto_install'  : False,
+    'application'   : True,
+}

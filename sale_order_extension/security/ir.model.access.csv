@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_term,delivery.term,model_delivery_term,sales_team.group_sale_salesman,1,1,1,0
+access_delivery_term_manager,delivery.term,model_delivery_term,sales_team.group_sale_manager,1,1,1,1
+access_date_of_delivery,date.of.delivery.team,model_date_of_delivery,sales_team.group_sale_salesman,1,1,1,0
+access_date_of_delivery_manager,date.of.delivery,model_date_of_delivery,sales_team.group_sale_manager,1,1,1,1
+access_sale_validity,sale.validity,model_sale_validity,sales_team.group_sale_salesman,1,1,1,0
+access_sale_validity_manager,sale.validity,model_sale_validity,sales_team.group_sale_manager,1,1,1,1
+access_sale_warranty,sale.warranty,model_sale_warranty,sales_team.group_sale_salesman,1,1,1,0
+access_sale_warranty_manager,sale.warranty,model_sale_warranty,sales_team.group_sale_manager,1,1,1,1

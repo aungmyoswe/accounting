@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	<report id="action_service_ticket_print" 
+		model="helpdesk.ticket"
+        string="Service Ticket" 
+        report_type="qweb-pdf"
+        name="helpdesk_extension.service_ticket_report"
+        file="helpdesk_extension.service_ticket_report"
+        menu="False" />
+    </data>
+</odoo>

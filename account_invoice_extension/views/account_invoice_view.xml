@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_form_extension" model="ir.ui.view">
+        <field name="name">account.invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_untaxed']" position="after">
+                <field name="amount_discount" string="Discount"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='discount']" position='replace'>
+                <field name="discount_line_type"/>
+                <field name="dis_amount" string="Discount"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']" position="after">
+                <group>
+                    <group>
+                        <group>
+                            <label for="discount_type"/>
+                            <field name="discount_type" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <label for="discount_rate"/>
+                            <field name="discount_rate" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="tax" invisible="1"/>
+                            <field name="is_tax" attrs="{'invisible':[('tax','=',False)]}"/>
+                            <field name="tax_type" attrs="{'invisible':[('is_tax','=',False)]}"/>
+                        </group>
+                    </group>
+                   <group class="oe_subtotal_footer oe_right">
+                        <field name="amount_untaxed"/>
+                        <field name="amount_discount"/>
+                        <field name="disc_sub_total" class="oe_subtotal_footer_separator"/>
+                        <field name="amount_tax" attrs="{'invisible':[('is_tax','=',False)]}"/>
+                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                        <field name="payments_widget" colspan="2" nolabel="1" widget="payment"/>
+                        <field name="residual" class="oe_subtotal_footer_separator" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                        <field name="reconciled" invisible="1"/>
+                        <field name="outstanding_credits_debits_widget" colspan="2" nolabel="1" widget="payment" attrs="{'invisible': [('state', 'not in', 'open')]}"/>
+                    </group>
+                </group>
+            </xpath>
+             <xpath expr="//field[@name='tax_line_ids']" position="replace">
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+		<record id="view_inventory_list_inherit" model="ir.ui.view">
+			<field name="name">Inventory Reports</field>
+			<field name="model">inventory.in.out.reports</field>
+			<field name="inherit_id" ref="inventory_in_out_report.view_inventory_list"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='print_report']" position='after'>
+                    <button name="print_report_xlsx" string="Excel" class="oe_highlight" type="object" context="{'xls_export':1}" colspan="2"/>
+                </xpath>
+			</field>
+		</record>
+    </data>
+</odoo>

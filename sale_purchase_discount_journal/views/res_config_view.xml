@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_discount_config" model="ir.ui.view">
+            <field name="name">res.config.seetings</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//t[@groups='account.group_account_user']" position="after">
+                    <h2>Discount</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box" title="These discount are set in any sale invoice created.">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Default Discount</span>
+                                 <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Sales Discount" for="sale_discount_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sale_discount" class="oe_inline"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label string="Purchase Discount" for="sale_discount_id" class="col-lg-3 o_light_label"/>
+                                        <field name="purchase_discount" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

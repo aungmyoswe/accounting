@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="helpdesk_ticket_view_form_extension" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <field name="team_id" position="before">
+                    <field name="partner_name" required="1" string="Contact Person Name"/>
+                </field>
+                <xpath expr="//group/group[2]/field[@name='partner_name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="partner_name" position="before">
+                    <field name="partner_id" required="1" string="Customer Name"/>
+                </field>
+                <xpath expr="//group/group[2]/field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="partner_name" position="after">
+                    <field name="partner_email" required="1" string="Customer Email"/>
+                </field>
+                <xpath expr="//group/group[2]/field[@name='partner_email']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="partner_email" position="after">
+                    <field name="phone"/>
+                </field>
+                <xpath expr="//group/group[1]/field[@name='team_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group/group[1]/field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--  Invisible partner_email field in helpdask by Tin Htoo Aung(1.7.2019)-->
+                 <xpath expr="//group/group[1]/field[@name='partner_email']" position="attributes">
+                    <attribute name="required">0</attribute>
+                </xpath>
+                <!-- *************************************************** -->  
+                <field name="ticket_type_id" position="replace">
+                    <field name="date_receive"/>
+                    <field name="date_request"/>
+                     <field name="document_id"/>
+                    <field name="user_id" string="Assign Technician"/>
+                    <field name="company_id"/>
+                </field>
+                <xpath expr="//group/group[1]/field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group/group[2]/field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="selection" widget="selection"/>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="after">
+                    <sheet>
+                        <notebook colspan="4">
+                            <page string="Product Information">
+                                <group>
+                                    <group>
+                                        <field name="product"/>
+                                        <field name="brand"/>
+                                    </group>
+                                    <group>
+                                        <field name="model"/>
+                                        <field name="serial_number"/>
+                                    </group>
+                                    <field name="add_note" placeholder="Add notes"/>
+                                </group>
+                            </page>
+
+                            <page string="Accessories Information">
+                                <field name="helpdesk_ticket_id">
+                                    <tree editable="bottom">
+                                        <field name="name" style="width:450px"/>
+                                        <field name="quantity" style="width:80px"/>
+                                        <field name="accessories_description"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Customer Complain">
+                                <tree>
+                                    <field name="description" placeholder="Complain Description"/>
+                                </tree>
+                            </page>
+
+                            <page string="Initital Finding">
+                                <tree>
+                                    <field name="case" placeholder="Finding Case"/>
+                                </tree>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_service_ticket_print)d" string="Print Ticket" type="action" class="oe_highlight" groups="helpdesk.group_helpdesk_user"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

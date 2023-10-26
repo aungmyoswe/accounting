@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="date_of_delivery_form_view" model="ir.ui.view">
+		 	<field name="name">Date of Delivery From</field>
+		 	<field name="model">date.of.delivery</field>
+		 	<field name="arch" type="xml">
+		 		<form>
+		 			<sheet>
+		 				<group>
+		 					<field name="name"/>                     
+		 				</group>
+		 			</sheet>
+		 		</form>
+		 	</field>
+		 </record>
+		 <record id="date_of_delivery_tree_view" model="ir.ui.view">
+		 	<field name="name">Date of Delivery</field>
+		 	<field name="model">date.of.delivery</field>
+		 	<field name="arch" type="xml">
+		 		<tree>
+		 			<field name="name"/>
+		 		</tree>
+		 	</field>
+		 </record>
+		 <record id="date_of_delivery_filter_view" model="ir.ui.view">
+		 	<field name="name">Delivery Filter</field>
+		 	<field name="model">date.of.delivery</field>
+		 	<field name="arch" type="xml">
+		 		<search>
+		 			<field name="name"/>
+		 			<group expand="0" string="Group By">
+		 				<filter string="Name" name="name" domain="" context="{'group_by':'name'}"/>
+		 			</group>
+		 		</search>
+		 	</field>
+		 </record>
+		<record id="action_date_of_delivery" model="ir.actions.act_window">
+			<field name="name">Date of Delivery</field>
+			<field name="res_model">date.of.delivery</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="date_of_delivery_tree_view"/>
+		</record>
+		<menuitem action="action_date_of_delivery" id="menu_date_of_deliver" name="Date of Delivery" parent="sale.menu_sale_config" sequence="10" groups="sales_team.group_sale_manager"  />
+	</data>
+</odoo>

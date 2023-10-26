@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report id="action_inventory_report_by_warehouse" model="stock.move"
+        string="Inventory In Out Report" report_type="qweb-pdf"
+        name="inventory_in_out_report.inventory_report_by_warehouse"
+        file="inventory_in_out_report.inventory_report_by_warehouse"
+        menu="False" />
+
+    <report id="action_inventory_report_by_category" model="stock.move"
+        string="Inventory In Out Report" report_type="qweb-pdf"
+        name="inventory_in_out_report.inventory_report_by_category" file="inventory_in_out_report.inventory_report_by_category"
+        menu="False" />
+
+</odoo>

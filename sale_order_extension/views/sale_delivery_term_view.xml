@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="delivery_term_form_view" model="ir.ui.view">
+		 	<field name="name">Delivery Term From</field>
+		 	<field name="model">delivery.term</field>
+		 	<field name="arch" type="xml">
+		 		<form>
+		 			<sheet>
+		 				<group>
+		 					<field name="name"/>                     
+		 				</group>
+		 			</sheet>
+		 		</form>
+		 	</field>
+		 </record>
+		 <record id="delivery_term_tree_view" model="ir.ui.view">
+		 	<field name="name">Delivery Term Tree</field>
+		 	<field name="model">delivery.term</field>
+		 	<field name="arch" type="xml">
+		 		<tree>
+		 			<field name="name"/>
+		 		</tree>
+		 	</field>
+		 </record>
+		 <record id="delivery_term_filter_view" model="ir.ui.view">
+		 	<field name="name">Delivery Filter</field>
+		 	<field name="model">delivery.term</field>
+		 	<field name="arch" type="xml">
+		 		<search>
+		 			<field name="name"/>
+		 			<group expand="0" string="Group By">
+		 				<filter string="Name" name="name" domain="" context="{'group_by':'name'}"/>
+		 			</group>
+		 		</search>
+		 	</field>
+		 </record>
+		<record id="action_delivery_term" model="ir.actions.act_window">
+			<field name="name">Delivery</field>
+			<field name="res_model">delivery.term</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="delivery_term_tree_view"/>
+		</record>
+		<menuitem action="action_delivery_term" id="menu_deliver_term" name="Delivery Term" 
+			parent="sale.menu_sale_config"
+			sequence="10" groups="sales_team.group_sale_manager"  />
+	</data>
+</odoo>

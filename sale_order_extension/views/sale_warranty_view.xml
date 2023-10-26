@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="sale_warranty_form_view" model="ir.ui.view">
+		 	<field name="name">Sale Warranty Form</field>
+		 	<field name="model">sale.warranty</field>
+		 	<field name="arch" type="xml">
+		 		<form>
+		 			<sheet>
+		 				<group>
+		 					<field name="name"/>                     
+		 				</group>
+		 			</sheet>
+		 		</form>
+		 	</field>
+		 </record>
+		 <record id="sale_warranty_tree_view" model="ir.ui.view">
+		 	<field name="name">Sale Warranty Tree</field>
+		 	<field name="model">sale.warranty</field>
+		 	<field name="arch" type="xml">
+		 		<tree>
+		 			<field name="name"/>
+		 		</tree>
+		 	</field>
+		 </record>
+		 <record id="sale_warranty_filter_view" model="ir.ui.view">
+		 	<field name="name">Warranty Filter</field>
+		 	<field name="model">sale.warranty</field>
+		 	<field name="arch" type="xml">
+		 		<search>
+		 			<field name="name"/>
+		 			<group expand="0" string="Group By">
+		 				<filter string="Name" name="name" domain="" context="{'group_by':'name'}"/>
+		 			</group>
+		 		</search>
+		 	</field>
+		 </record>
+		<record id="action_sale_warranty" model="ir.actions.act_window">
+			<field name="name">Warranty</field>
+			<field name="res_model">sale.warranty</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="sale_warranty_tree_view"/>
+		</record>
+		<menuitem action="action_sale_warranty" id="menu_sale_warranty" name="Warranty" 
+			parent="sale.menu_sale_config"
+			sequence="11" groups="sales_team.group_sale_manager"  />
+	</data>
+</odoo>

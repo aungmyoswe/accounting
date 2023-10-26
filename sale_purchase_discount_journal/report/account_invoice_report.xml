@@ -1,0 +1,60 @@
+<odoo>
+    <template id="custom_invoice_report" inherit_id="account.report_invoice_document" priority="999">
+        <xpath expr="//div[@class='clearfix']" position="replace">  
+            <div class="clearfix">
+                <div id="total" class="row">
+                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                        <table class="table table-sm">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Untaxed Amount</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed"/>
+                                </td>
+                            </tr>
+                            <tr style="">
+                                <td><strong>Discount</strong></td>
+                                <td class="text-right o_price_total">
+                                    <span t-field="o.amount_discount"/>
+                                </td>
+                            </tr>
+                             <tr class="border-black o_subtotal" style="">
+                                <td><strong>After Discount Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.disc_sub_total"/>
+                                </td>
+                            </tr>
+                            <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                <tr style="">
+                                    <t t-if="len(o.tax_line_ids) == 1 and o.amount_untaxed == amount_by_group[2]">
+                                        <td><span t-esc="amount_by_group[0]"/></td>
+                                        <td class="text-right o_price_total">
+                                            <span t-esc="amount_by_group[3]" />
+                                        </td>
+                                    </t>
+                                    <t t-else="">
+                                        <td>
+                                            <span t-esc="amount_by_group[0]"/>
+                                            <strong>Tax</strong>
+                                            <!-- <span>&amp;nbsp;<span>on</span> -->
+                                              <!--   <t t-esc="amount_by_group[4]"/>
+                                            </span> -->
+                                        </td>
+                                        <td class="text-right o_price_total">
+                                            <span t-esc="amount_by_group[3]"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                            <tr class="border-black o_total">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

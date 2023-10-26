@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="stock.report_delivery_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            	<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+            	<div class="row" style="width:100%;font-size:15px;font-family:TimesNewsRoman;padding-top:30px;">
+                    <div style="width:30%;">
+                        <img src='/repair_extension/static/src/img/logo.jpg' style="width:70%;margin-left:15px;"/>
+                    </div>
+                    <div style="width:20%"></div>
+                    <div style="width:50%;padding-left:80px">
+                        <t t-if="o.company_id">
+                             <!-- <div>
+                                <div t-field="o.company_id.name"/>
+                                <div t-field="o.company_id.street"/>
+                                 <div>
+                                    <span t-field="o.company_id.street2"/>
+                                    <span>,</span>
+                                    <span t-field="o.company_id.township"/>
+                                </div>
+                                <div>
+                                    <span t-field="o.company_id.city"/>
+                                    <span>,</span>
+                                    <span t-field="o.company_id.country_id"/>
+                                </div>
+                            </div>
+                            <div style="padding-top:15px;">
+                                <span>Tel:</span>
+                                <span t-field="o.company_id.phone" style="padding-left:10px;"/>
+                            </div>
+                            <div>
+                                <span>Tel:</span>
+                                <span t-field="o.company_id.mobile" style="padding-left:10px;"/>
+                            </div>
+                            <div style="padding-top:15px;">
+                                <span>Service Center:</span>
+                                <span t-field="o.company_id.partner_id.mobile" style="padding-left:10px"/>
+                            </div>
+                            <div>
+                                <span>Email:</span>
+                                <span t-field="o.company_id.email" style="padding-left:10px"/>
+                            </div>
+                            <div>
+                                <span>Company Reg No:</span>
+                                <span t-field="o.company_id.company_registry" style="padding-left:10px"/>
+                            </div> -->
+                        </t>
+                    </div>
+                </div>
+                <h1 style="text-align:center;color:#7C7BAD;"><span>DELIVERY NOTE</span></h1>
+                <div class="page">
+                    <div style="max-height:700px;min-height:650px;">
+	                	<div class="row" style="max-height:;padding-top:50px">
+	            			<div cols="6" style="width:50%;">
+	            			</div>
+	            			<div cols="6" style="width:50%">
+	            				<p style="font-size:18px;text_align:center;padding-left:80px"><strong>DELIEVERED RECEIPT</strong></p>
+	            			</div>
+	                	</div>
+	        			<div class="row" style="padding-top:50px">
+	        				<div cols="3" style="width:15%;margin-left:30px;padding-top:10px;font-size:17px">
+	        					<p>DELIVER TO</p>
+	        				</div>
+	        				<div cols="3" style="width:35%;padding-top:10px;font-size:17px">
+						        <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False"/>
+                                    <div t-esc="partner"
+				                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+	        				</div>
+	        				<div cols="3" style="width:15%;padding-top:10px;">
+	        					<p>SHIP DATE</p>
+	        					<p>SHIP VIA</p>
+	        					<p>DELIVER NO</p>
+	        				</div>
+	        				<div cols="3" style="width:35%;padding-top:10px;">
+	        					<p>:<span t-field="o.scheduled_date"/></p>
+	        					<p>:</p>
+	        					<p>:<span t-field="o.name"/></p>
+	        				</div>
+	        			</div>
+                    <h2>
+                        <!-- <span t-field="o.name"/> -->
+                    </h2>
+                        <table style="width:100%;margin-top:50px;">
+                            <thead>
+                                <tr style="font-size:18px;width:100%;padding-top:30px;border:1.5px solid black;line-height:2">
+                                    <th style="width:10%;border-right:1.5px solid black;padding-left:40px;"><strong>No</strong></th>
+                                    <th style="width:60%;border-right:1.5px solid black;text_align:center;padding-left:30px;">
+                                        <strong>Description</strong>
+                                    </th>
+                                    <th style="width:30%;border-right:1.5px solid black;padding-left:130px;"><strong>Qty</strong></th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <t t-set="stt" t-value="0"/>
+                            <t t-set="lines" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty)"/>
+                                <t t-foreach="lines" t-as="move">
+                                    <tr style="width:100%;border:1.5px solid black;line-height:2;">
+                                    	<t t-set="stt" t-value="stt+1"/>
+                                        <td class="text-left" style="width:10%;text-align:center;border-right:1.5px solid black;padding-left:40px;">
+                                            <t t-esc="stt"/>
+                                        </td>
+                                        <td t-if="move.product_id" style="width:60%;border-right:1.5px solid black;text_align:center;padding-left:30px;">
+                                      		<span t-field="move.product_id.name"/>
+                                        </td>
+        								<td t-if="move.product_uom_qty>0" style="width:30%,border-right:1.5px solid black;text_align:center;padding-left:130px">
+        									<span t-field="move.product_uom_qty"/>
+        								</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="max-height:300px;min-height:50px">
+                        <div class="row" style="max-height:200px;padding-top:50px;margin-left:30px">
+    	            		<div cols="6" style="width:50%">
+    	            			<p style="font-size:18px;text_align:center;padding-left:80px"><strong>DELIEVER BY</strong></p>
+    	            		</div>
+    	            		<div cols="6" style="width:50%">
+    	            			<p style="font-size:18px;text_align:center;padding-left:80px"><strong>RECEIVED BY</strong></p>
+    	            		</div>
+    	                </div>
+    	        		<div class="row" style="padding-top:20px;">
+    	        			<div class="col-sx-3" style="width:15%;padding-top:10px;margin-left:30px">
+        	        			<p>SIGNATURE</p>
+        	        			<p>NAME</p>
+        	        			<p>ID NUMBER</p>
+    	        			</div>
+    	        			<div class="col-sx-3" style="width:35%;padding-top:10px">
+    	        				<p>:</p>
+    	        				<p>:</p>
+    	        				<p>:</p>
+    	        			</div>
+    	        			<div class="col-sx-3" style="width:15%;padding-top:10px;mrgin_left:30px">
+    	        				<p>SIGNATURE</p>
+    	        				<p>NAME</p>
+    	        				<p>ID NUMBER</p>
+    	        			</div>
+    	        			<div class="col-sx-3" style="width:35%;padding-top:10px">
+    	        				<p>:</p>
+    	        				<p>:</p>
+    	        				<p>:</p>
+    	        			</div>
+                        </div>
+                    </div>
+                   <!--  <div class="footer" style="line-height:1;text-align:center;font-size:17px;">
+                        <p><strong>Thank you for your bussiness</strong></p>
+                        <p>Should you have any enquiries concerning this delivery note,please contact : 01-8566717,01-8560135,01-856973</p>
+                        <p>Email: sales@amigosmyanmar.com, bd@amigosmyanmar.com, support@amigosmyanmar.com</p>
+	        		 </div> -->
+                </div>
+            </t>
+         </t>
+    </template>
+    <template id="stock.report_deliveryslip">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="stock.report_delivery_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </template>
+</odoo>

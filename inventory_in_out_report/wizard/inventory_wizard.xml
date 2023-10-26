@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_inventory_list" model="ir.ui.view">
+			<field name="name">Inventory In Out Reports</field>
+			<field name="model">inventory.in.out.reports</field>
+			<field name="arch" type="xml">
+				<form string="Inventory" version="7.0">
+					<group string="Company">
+						<field name="company_id"  string="Company" widget="selection" />
+						<!-- <label string="(If you do not select company it will take all companies)"
+							colspan="4" /> -->
+					</group>
+					<group string="Warehouses">
+						<field name="warehouse_ids" widget="many2many_tags" string="Warehouses" options="{'no_open':True, 'no_quick_create':True,'no_create_edit':True}"/>
+						<!-- <label
+							string="(If you do not select warehouse it will take all warehouses)"
+							colspan="4" /> -->
+					</group>
+					<group string="Location"
+						attrs="{'invisible': [('warehouse_ids', '=', [(6, False, [])])]}">
+						<field name="location_id" string="Select Location" options="{'no_open':True, 'no_quick_create':True,'no_create_edit':True}"/>
+						<!-- <label
+							string="(If you do not select any location, then it will take all above warehouses internal locations)"
+							colspan="4" /> -->
+					</group>
+					<group>
+						<field name="start_date" />
+						<field name="end_date" />
+						<field name="sort_order"/>
+						<field name="display_all_products" />
+						<field name="include_zero" />
+					</group>
+					<group attrs="{'invisible': [('sort_order', '=', 'product_category')]}"
+						string="Select Products">
+						<!-- <label
+							string="(If you do not select any products it will take all products)"
+							colspan="4" /> -->
+						<field name="filter_product_ids" nolabel="1" options="{'no_quick_create':True,'no_create_edit':True}">
+							<tree string="Products">
+								<field name="name" />
+								<field name="default_code" />
+								<field name="attribute_value_ids" />
+								<field name="qty_available" />
+							</tree>
+						</field>
+					</group>
+					<group attrs="{'invisible': [('sort_order', '=', 'warehouse')]}"
+						string="Select Categories">
+						<!-- <label
+							string="(If you do not select any categories it will take all categories)"
+							colspan="4" /> -->
+						<field name="filter_product_categ_ids" nolabel="1" options="{'no_quick_create':True,'no_create_edit':True}">
+							<tree string="Products">
+								<field name="name" />
+							</tree>
+						</field>
+					</group>
+					<footer>
+						<button name="print_report" string="Print" type="object"
+							class="oe_highlight" />
+						or
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_inventory_report">
+			<field name="name">Inventory In Out Report</field>
+			<field name="res_model">inventory.in.out.reports</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="view_inventory_list" />
+			<field name="target">new</field>
+		</record>
+
+		<menuitem action="action_inventory_report" string="Inventory In Out Report" 
+			id="menu_action_inventory_report"
+			parent="stock.menu_warehouse_report" sequence="1" />
+
+	</data>
+</openerp>

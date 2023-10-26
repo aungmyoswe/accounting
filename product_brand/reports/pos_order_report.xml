@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="view_report_pos_order_pivot_ext" model="ir.ui.view">
+        <field name="name">report.pos.order.pivot</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+        <field name="arch" type="xml">
+            <field name="product_categ_id" position="after">
+                <field name="product_brand_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_report_pos_order_graph_ext" model="ir.ui.view">
+        <field name="name">report.pos.order.graph</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_graph"/>
+        <field name="arch" type="xml">
+            <graph string="Point of Sale Analysis">
+                <field name="product_categ_id" type="row"/>
+                <field name="price_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_report_pos_order_search_ext" model="ir.ui.view">
+        <field name="name">report.pos.order.search</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='date']" position="after">
+        		<field name="product_brand_id"/>
+        	</xpath>
+        	<xpath expr="//filter[@name='User']" position="after">
+        		<filter string="Brand" name="Brand" context="{'group_by':'product_brand_id'}"/>
+        	</xpath>
+        </field>
+    </record>
+</odoo>
